@@ -19,7 +19,7 @@
 // Structures
 
 // Prototypes
-char    *ud_file_read_ctr(char *path, size_t *p_len)
+char    *ud_file_read_ctr(char *path, size_t *p_len);
 int     ud_file_write_ctr(char *path, char *content, int flag);
 void    ud_file_clear(char *path);
 
