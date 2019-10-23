@@ -1,6 +1,6 @@
 #include "ud_file.h"
 
-char    *ud_file_read(char *path)
+char    *ud_file_read_ctr(char *path, size_t *p_len)
 {
     int     fd = open(path, O_RDONLY);
     if (!path || access(path, R_OK) || read(fd, NULL, 0) == -1)
@@ -44,5 +44,6 @@ char    *ud_file_read(char *path)
     ud_list_free(buf_list);
 
     close(fd);
+    if (p_len) *p_len = total_len;
     return content;
 }
