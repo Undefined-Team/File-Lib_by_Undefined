@@ -2,6 +2,5 @@
 
 void    ud_file_clear(char *path)
 {
-    char eraser[] = "";
-    ud_file_write(path, eraser);
+    ud_file_write(path, "");
 }
