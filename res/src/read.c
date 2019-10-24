@@ -32,7 +32,7 @@ char    *ud_file_read_ctr(char *path, size_t *p_len)
     }
 
     char *content = NULL;
-    UD_UT_PROT_MALLOC(content = ud_ut_malloc((total_len + 1) * sizeof(char)));
+    ud_ut_prot_malloc(content = ud_ut_malloc((total_len + 1) * sizeof(char)));
     char *p_content = content;
     curr = buf_list;
     while (curr)
