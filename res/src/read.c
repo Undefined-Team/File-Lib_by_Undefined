@@ -41,7 +41,7 @@ char    *ud_file_read_ctr(char *path, size_t *p_len)
         curr = curr->next;
     }
     *p_content = '\0';
-    ud_list_free(buf_list);
+    ud_list_free(ud_file_read_list, buf_list);
 
     close(fd);
     if (p_len) *p_len = total_len;
