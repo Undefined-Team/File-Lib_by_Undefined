@@ -1,5 +1,7 @@
 #include "ud_file.h"
 
+ud_list_define(ud_list_file_read, ud_list_default_free, NULL);
+
 char    *ud_file_read_ctr(char *path, size_t *p_len)
 {
     int     fd = open(path, O_RDONLY);
@@ -10,18 +12,12 @@ char    *ud_file_read_ctr(char *path, size_t *p_len)
     size_t              len = 0;
     size_t              total_len = 0;
 
-    typedef struct      uds_file_read_list {
-        void            (*fp_free)(void *val);
-        struct          uds_file_read_list *next;
-        char            data[BUF_SIZE];
-    }                   ud_file_read_list;
-
-    ud_file_read_list   *buf_list = NULL;
-    ud_file_read_list   *curr = NULL;
+    ud_list_file_read   *buf_list = NULL;
+    ud_list_file_read   *curr = NULL;
 
     len = read(fd, buf, BUF_SIZE);
     total_len += len;
-    buf_list = ud_list_minit(ud_file_read_list);
+    buf_list = ud_list_minit(ud_list_file_read);
     ud_mem_cpy(buf_list->data, buf, len);
     curr = buf_list;
     while ((len = read(fd, buf, BUF_SIZE)) > 0)
@@ -41,7 +37,7 @@ char    *ud_file_read_ctr(char *path, size_t *p_len)
         curr = curr->next;
     }
     *p_content = '\0';
-    ud_list_free(ud_file_read_list, buf_list);
+    ud_list_free(ud_list_file_read, buf_list);
 
     close(fd);
     if (p_len) *p_len = total_len;

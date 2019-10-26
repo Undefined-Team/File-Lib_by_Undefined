@@ -17,6 +17,7 @@
 # define BUF_SIZE                               4096
 
 // Structures
+ud_list_struct(ud_list_file_read, char data[BUF_SIZE]);
 
 // Prototypes
 char    *ud_file_read_ctr(char *path, size_t *p_len);
