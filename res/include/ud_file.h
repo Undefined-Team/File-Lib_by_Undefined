@@ -10,10 +10,10 @@
 #include <ud_string.h>
 
 // Macro
-# define ud_file_read(path)                     ud_file_read_ctr(path, NULL)
-# define ud_file_write(path, content)           ud_file_write_ctr(path, content, 0)
-# define ud_file_write_append(path, content)    ud_file_write_ctr(path, content, O_APPEND)
-# define ud_file_exists(_path)                  ({ int _fd = open(_path, O_RDONLY); ud_bool _exists = !(!_path || access(_path, R_OK) || (read(_fd, NULL, 0) == -1)); close(_fd); _exists; })
+# define ud_file_read(_path)                    ud_file_read_ctr(_path, NULL)
+# define ud_file_write(_path, _content)         ud_file_write_ctr(_path, _content, 0)
+# define ud_file_write_append(_path, _content)  ud_file_write_ctr(_path, _content, O_APPEND)
+# define ud_file_exists(_path)                  ({ char *_path_tmp = _path; int _fd = open(_path_tmp, O_RDONLY); ud_bool _exists = !(!_path_tmp || access(_path_tmp, R_OK) || (read(_fd, NULL, 0) == -1)); close(_fd); _exists; })
 # define BUF_SIZE                               4096
 
 // Structures
